@@ -28,7 +28,6 @@ WHERE id_cliente = 11
 
 -- 
 
-*/
 
 CREATE OR ALTER TRIGGER tgClientes
 ON dCliente 
@@ -51,3 +50,24 @@ VALUES
 
 DELETE FROM dCliente
 WHERE id_cliente = 12
+
+
+*/
+
+-- Criando uma Trigger com INSTEAD OF 
+
+SELECT FORMAT(GETDATE(), 'dddd')
+
+CREATE OR ALTER TRIGGER tgControleRegistros 
+ON dCliente
+INSTEAD OF INSERT
+AS
+BEGIN
+	IF  FORMAT(GETDATE(), 'dddd') IN ('sábado', 'domingo')
+	BEGIN
+		RAISERROR('O cadastro de clientes só pode ser feito em dias úteis',1,1)
+		ROLLBACK
+	END
+
+
+END
