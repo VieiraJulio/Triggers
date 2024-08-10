@@ -69,7 +69,12 @@ BEGIN
 		RAISERROR('O cadastro de clientes só pode ser feito em dias úteis',1,1)
 		ROLLBACK
 	END
-
+	ELSE
+	BEGIN
+		
+		INSERT INTO dCliente(nome_cliente,genero, data_de_nascimento, cpf)
+		SELECT nome_cliente,genero, data_de_nascimento, cpf FROM INSERTED 
+	END
 
 END
 
