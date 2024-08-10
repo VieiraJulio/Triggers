@@ -55,12 +55,13 @@ WHERE id_cliente = 12
 */
 
 -- Criando uma Trigger com INSTEAD OF 
+-- APLICADA SOMENTE EM CADASTROS EM DIAS ÚTEIS
 
 SELECT FORMAT(GETDATE(), 'dddd')
 
 CREATE OR ALTER TRIGGER tgControleRegistros 
 ON dCliente
-INSTEAD OF INSERT
+INSTEAD OF INSERT, UPDATE, DELETE
 AS
 BEGIN
 	IF  FORMAT(GETDATE(), 'dddd') IN ('sábado', 'domingo')
@@ -71,3 +72,8 @@ BEGIN
 
 
 END
+
+
+INSERT INTO dCliente(nome_cliente,genero, data_de_nascimento, cpf) 
+VALUES
+	('Vinicius Carvalho','M','16/07/1996', '111.444.366-99')
