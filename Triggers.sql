@@ -82,3 +82,14 @@ END
 INSERT INTO dCliente(nome_cliente,genero, data_de_nascimento, cpf) 
 VALUES
 	('Vinicius Carvalho','M','16/07/1996', '111.444.366-99')
+
+
+-- Habilitando uma/ALL Trigger e excluindo : 
+
+DISABLE TRIGGER tgControleRegistros ON dCliente
+
+ENABLE TRIGGER ALL  ON dCliente
+
+-- Drop: 
+
+DROP TRIGGER tgControleRegistros
