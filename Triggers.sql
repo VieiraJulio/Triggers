@@ -52,7 +52,7 @@ DELETE FROM dCliente
 WHERE id_cliente = 12
 
 
-*/
+
 
 -- Criando uma Trigger com INSTEAD OF 
 -- APLICADA SOMENTE EM CADASTROS EM DIAS ÚTEIS
@@ -93,3 +93,22 @@ ENABLE TRIGGER ALL  ON dCliente
 -- Drop: 
 
 DROP TRIGGER tgControleRegistros
+
+
+*/
+
+-- TRIGGER DDL CREATE, DROP E ALTER
+
+
+CREATE OR ALTER TRIGGER tgRecusartabelas
+ON DATABASE
+FOR CREATE_TABLE, ALTER_TABLE, DROP_TABLE
+AS
+BEGIN
+	
+	PRINT 'Não é permitado alteração, exclusão e inclusão de tabelas'
+	ROLLBACK
+END
+
+CREATE TABLE Teste(ID INT)
+DROP TABLE Teste
